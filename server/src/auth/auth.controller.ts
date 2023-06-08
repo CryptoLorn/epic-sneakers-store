@@ -6,17 +6,21 @@ import { TokensService } from "../tokens/tokens.service";
 import { AuthDto } from "./dto/auth.dto";
 import { constant } from "../core/constants/constant";
 import { IUserResponse } from "../core/interfaces/user.interface";
+import { MailService } from "../mail/mail.service";
 
 @Controller("auth")
 export class AuthController {
     constructor(private authService: AuthService,
-                private tokenService: TokensService) {}
+                private tokenService: TokensService,
+                private mailService: MailService) {}
 
     @HttpCode(HttpStatus.CREATED)
     @Post("signup")
     async registration(@Body() userDto: AuthDto, @Res({ passthrough: true }) res: Response
     ): Promise<IUserResponse> {
         const tokens = await this.authService.registration(userDto);
+
+        await this.mailService.sendEmail(tokens.user.email, tokens.user.activation_link);
 
         res.cookie(
             constant.REFRESH_TOKEN,

@@ -3,10 +3,12 @@ import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
 import { Tokens } from "../tokens/tokens.model";
 import { roleEnum } from "./enums/role.enum";
 import { statusEnum } from "./enums/status.enum";
+import { constant } from "../core/constants/constant";
 
 interface UserCreationAttrs {
     email: string;
     password: string;
+    activation_link: string;
 }
 
 @Table({tableName: "users"})
@@ -20,7 +22,7 @@ export class User extends Model<User, UserCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
 
-    @Column({type: DataType.ENUM({values: roleEnum}), defaultValue: "USER"})
+    @Column({type: DataType.ENUM({values: roleEnum}), defaultValue: constant.USER})
     role: string;
 
     @Column({type: DataType.ENUM({values: statusEnum}), defaultValue: "ACTIVATED"})

@@ -7,10 +7,11 @@ import { UsersModule } from "../users/users.module";
 import { TokensModule } from "../tokens/tokens.module";
 import { AccessTokenStrategy } from "./strategies/accessToken.strategy";
 import { RefreshTokenStrategy } from "./strategies/refreshToken.strategy";
+import { MailService } from "../mail/mail.service";
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy],
+  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy, MailService],
   imports: [
     forwardRef(() => UsersModule),
     JwtModule,

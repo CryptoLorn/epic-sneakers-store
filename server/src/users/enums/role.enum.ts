@@ -1,4 +1,6 @@
+import { constant } from "../../core/constants/constant";
+
 export const roleEnum = [
-    "ADMIN",
-    "USER"
+    constant.ADMIN,
+    constant.USER
 ]
