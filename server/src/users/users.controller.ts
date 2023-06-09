@@ -1,12 +1,13 @@
-import { Controller, Get, Param, Res, UseGuards } from "@nestjs/common";
+import {Body, Controller, Get, NotFoundException, Param, Post, Put, Req, Res, UseGuards} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import { UsersService } from "./users.service";
 import { IUser } from "../core/interfaces/user.interface";
 import { RoleGuard } from "../core/guards/role.guard";
 import { Roles } from "../core/guards/rolesAuth.decorator";
 import { constant } from "../core/constants/constant";
+import { UpdateDto } from "./dto/update.dto";
 
 @Controller("users")
 export class UsersController {
@@ -25,5 +26,31 @@ export class UsersController {
     @Get("/:id")
     async getAll(@Param("id") id: number): Promise<IUser[]> {
         return await this.userService.getAll(id);
+    }
+
+    @Roles(constant.ADMIN)
+    @UseGuards(RoleGuard)
+    @UseGuards(AuthGuard("jwt"))
+    @Put("/:id")
+    async updateById(@Param("id") id: number, @Body() user: UpdateDto): Promise<[number]> {
+        return await this.userService.updateById(id, user);
+    }
+
+    @Post("/password/forgot")
+    async forgotPassword(@Body("email") email: string): Promise<string> {
+        return await this.userService.forgotPassword(email);
+    }
+
+    @Put("/password/forgot")
+    async setNewPassword(@Body("password") password: string, @Req() req: Request) {
+        const tokenWithBearer = req.get(constant.AUTHORIZATION);
+
+        if (!tokenWithBearer) {
+            throw new NotFoundException({message: "No token"});
+        }
+
+        const token = tokenWithBearer.split(' ')[1];
+
+        return await this.userService.setNewPassword(token, password);
     }
 }

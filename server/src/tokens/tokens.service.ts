@@ -1,10 +1,11 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { JwtService } from "@nestjs/jwt";
 
 import { Tokens } from "./tokens.model";
 import { TokensDto } from "./dto/tokens.dto";
-import {IToken, ITokenResponse, IUser} from "../core/interfaces/user.interface";
+import { IToken, ITokenResponse, IUser } from "../core/interfaces/user.interface";
+import { constant } from "../core/constants/constant";
 
 @Injectable()
 export class TokensService {
@@ -71,5 +72,27 @@ export class TokensService {
         }
 
         return await this.tokenRepository.destroy({where: {refresh_token: refreshToken}});
+    }
+
+    createActionToken(tokenType: string, payload = {}): string {
+        let expiresIn = "1d";
+
+        if (tokenType === constant.FORGOT_PASSWORD_TOKEN) {
+            expiresIn = "7d";
+        }
+
+        return this.jwtService.sign(payload,{secret: process.env.ACTION_TOKEN_SECRET, expiresIn});
+    }
+
+    checkToken(token: string): {id: number} {
+        try {
+            return this.jwtService.verify(token, {secret: process.env.ACTION_TOKEN_SECRET});
+        } catch (e) {
+            throw new HttpException("Token not valid", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    async deleteById(id: number): Promise<number> {
+        return await this.tokenRepository.destroy({where: {userId: id}});
     }
 }
