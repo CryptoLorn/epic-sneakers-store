@@ -1,4 +1,16 @@
-import {Body, Controller, Get, NotFoundException, Param, Post, Put, Req, Res, UseGuards} from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    NotFoundException,
+    Param,
+    Post,
+    Put,
+    Req,
+    Res,
+    UseGuards
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Request, Response } from "express";
 
@@ -42,7 +54,7 @@ export class UsersController {
     }
 
     @Put("/password/forgot")
-    async setNewPassword(@Body("password") password: string, @Req() req: Request) {
+    async setNewPassword(@Body("password") password: string, @Req() req: Request): Promise<string> {
         const tokenWithBearer = req.get(constant.AUTHORIZATION);
 
         if (!tokenWithBearer) {
@@ -52,5 +64,13 @@ export class UsersController {
         const token = tokenWithBearer.split(' ')[1];
 
         return await this.userService.setNewPassword(token, password);
+    }
+
+    @Roles(constant.ADMIN)
+    @UseGuards(RoleGuard)
+    @UseGuards(AuthGuard("jwt"))
+    @Delete("/:id")
+    async deleteById(@Param("id") id: number): Promise<number> {
+        return this.userService.deleteById(id);
     }
 }

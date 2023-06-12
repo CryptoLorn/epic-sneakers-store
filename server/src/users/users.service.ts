@@ -12,6 +12,7 @@ import { TokensService } from "../tokens/tokens.service";
 import { ActionTokenService } from "../actionToken/actionToken.service";
 import { MailService } from "../mail/mail.service";
 import { constant } from "../core/constants/constant";
+import { BasketsService } from "../baskets/baskets.service";
 
 @Injectable()
 export class UsersService {
@@ -19,7 +20,8 @@ export class UsersService {
                 private userRepository: typeof User,
                 private tokenService: TokensService,
                 private actionTokenService: ActionTokenService,
-                private mailService: MailService) {}
+                private mailService: MailService,
+                private basketService: BasketsService) {}
 
     async create(userDto: AuthDto): Promise<IUser> {
         const candidate = await this.getUserByEmail(userDto.email);
@@ -31,12 +33,15 @@ export class UsersService {
         const activationLink = uuid.v4();
         const hashPassword = await bcrypt.hash(userDto.password, 7);
 
-        return await this.userRepository.create(
+        const user = await this.userRepository.create(
             {
                 ...userDto,
                 password: hashPassword,
                 activation_link: activationLink
             });
+        await this.basketService.create(user.id);
+
+        return await this.userRepository.findOne({where: {email: user.email}, include: "basket"});
     }
 
     async checkIsUserPresent(dto: AuthDto): Promise<IUser> {
@@ -131,5 +136,12 @@ export class UsersService {
         await this.userRepository.update({password: hashPassword}, {where: {id: userId}});
 
         return "ok";
+    }
+
+    async deleteById(id: number): Promise<number> {
+        await this.basketService.deleteById(id);
+        await this.tokenService.deleteById(id);
+
+        return await this.userRepository.destroy({where: {id}});
     }
 }

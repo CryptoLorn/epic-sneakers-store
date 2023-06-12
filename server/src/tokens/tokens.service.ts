@@ -1,10 +1,11 @@
-import {HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException} from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { JwtService } from "@nestjs/jwt";
 
 import { Tokens } from "./tokens.model";
 import { TokensDto } from "./dto/tokens.dto";
-import { IToken, ITokenResponse, IUser } from "../core/interfaces/user.interface";
+import { IToken, ITokenResponse } from "../core/interfaces/token.interface";
+import { IUser } from "../core/interfaces/user.interface";
 import { constant } from "../core/constants/constant";
 
 @Injectable()

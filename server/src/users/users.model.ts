@@ -1,5 +1,6 @@
 import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
 
+import { Baskets } from "../baskets/baskets.model";
 import { Tokens } from "../tokens/tokens.model";
 import { roleEnum } from "./enums/role.enum";
 import { statusEnum } from "./enums/status.enum";
@@ -36,4 +37,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
     @HasOne(() => Tokens)
     tokens: Tokens;
+
+    @HasOne(() => Baskets)
+    basket: Baskets;
 }
