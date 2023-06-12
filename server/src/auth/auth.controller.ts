@@ -6,7 +6,7 @@ import { TokensService } from "../tokens/tokens.service";
 import { MailService } from "../mail/mail.service";
 import { AuthDto } from "./dto/auth.dto";
 import { constant } from "../core/constants/constant";
-import { IUserResponse } from "../core/interfaces/user.interface";
+import { IUserResponse } from "../users/interfaces/user.interface";
 
 @Controller("auth")
 export class AuthController {

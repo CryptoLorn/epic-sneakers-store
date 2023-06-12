@@ -12,6 +12,8 @@ import { MailModule } from "./mail/mail.module";
 import { ActionTokenModule } from "./actionToken/actionToken.module";
 import { ActionToken } from "./actionToken/actionToken.model";
 import { BasketsModule } from "./baskets/baskets.module";
+import { OrdersModule } from './orders/orders.module';
+import { Orders } from "./orders/orders.model";
 
 @Module({
   controllers: [],
@@ -27,7 +29,7 @@ import { BasketsModule } from "./baskets/baskets.module";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Baskets, Tokens, ActionToken],
+      models: [User, Baskets, Orders, Tokens, ActionToken],
       autoLoadModels: true
     }),
     UsersModule,
@@ -35,7 +37,8 @@ import { BasketsModule } from "./baskets/baskets.module";
     TokensModule,
     MailModule,
     ActionTokenModule,
-    BasketsModule
+    BasketsModule,
+    OrdersModule
   ]
 })
 export class AppModule {}

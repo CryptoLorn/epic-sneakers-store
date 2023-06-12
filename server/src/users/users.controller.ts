@@ -15,7 +15,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { Request, Response } from "express";
 
 import { UsersService } from "./users.service";
-import { IUser } from "../core/interfaces/user.interface";
+import { IUser } from "./interfaces/user.interface";
 import { RoleGuard } from "../core/guards/role.guard";
 import { Roles } from "../core/guards/rolesAuth.decorator";
 import { constant } from "../core/constants/constant";

@@ -4,8 +4,8 @@ import { JwtService } from "@nestjs/jwt";
 
 import { Tokens } from "./tokens.model";
 import { TokensDto } from "./dto/tokens.dto";
-import { IToken, ITokenResponse } from "../core/interfaces/token.interface";
-import { IUser } from "../core/interfaces/user.interface";
+import { IToken, ITokenResponse } from "./interfaces/token.interface";
+import { IUser } from "../users/interfaces/user.interface";
 import { constant } from "../core/constants/constant";
 
 @Injectable()

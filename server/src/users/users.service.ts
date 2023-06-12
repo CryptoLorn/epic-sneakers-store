@@ -6,7 +6,7 @@ import * as uuid from "uuid";
 
 import { User } from "./users.model";
 import { AuthDto } from "../auth/dto/auth.dto";
-import { IUser } from "../core/interfaces/user.interface";
+import { IUser } from "./interfaces/user.interface";
 import { UpdateDto } from "./dto/update.dto";
 import { TokensService } from "../tokens/tokens.service";
 import { ActionTokenService } from "../actionToken/actionToken.service";

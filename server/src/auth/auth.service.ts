@@ -3,7 +3,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 import { TokensService } from "../tokens/tokens.service";
 import { AuthDto } from "./dto/auth.dto";
-import { IUserResponse } from "../core/interfaces/user.interface";
+import { IUserResponse } from "../users/interfaces/user.interface";
 
 @Injectable()
 export class AuthService {

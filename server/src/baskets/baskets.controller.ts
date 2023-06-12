@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 
 import { BasketsService } from "./baskets.service";
-import { IBasket } from "../core/interfaces/basket.interface";
+import { IBasket } from "./interfaces/basket.interface";
 
 @Controller("baskets")
 export class BasketsController {

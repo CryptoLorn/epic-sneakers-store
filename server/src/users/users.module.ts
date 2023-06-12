@@ -12,12 +12,20 @@ import { AuthModule } from "../auth/auth.module";
 import { TokensService } from "../tokens/tokens.service";
 import { ActionTokenService } from "../actionToken/actionToken.service";
 import { MailService } from "../mail/mail.service";
+import { OrdersService } from "../orders/orders.service";
+import { Orders } from "../orders/orders.model";
 
 @Module({
     controllers: [UsersController],
-    providers: [UsersService, BasketsService, TokensService, ActionTokenService, MailService],
+    providers: [
+        UsersService,
+        BasketsService,
+        OrdersService,
+        TokensService,
+        ActionTokenService,
+        MailService],
     imports: [
-        SequelizeModule.forFeature([User, Baskets, Tokens, ActionToken]),
+        SequelizeModule.forFeature([User, Baskets, Orders, Tokens, ActionToken]),
         forwardRef(() => AuthModule),
     ],
     exports: [
