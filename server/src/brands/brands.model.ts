@@ -1,7 +1,8 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 
 import { Types } from "../types/types.model";
 import { BrandsTypes } from "./brandsTypes.model";
+import { Sneakers } from "../sneakers/sneakers.model";
 
 @Table({tableName: "brands"})
 export class Brands extends Model<Brands> {
@@ -13,4 +14,7 @@ export class Brands extends Model<Brands> {
 
     @BelongsToMany(() => Types, () => BrandsTypes)
     types: Types[];
+
+    @HasMany(() => Sneakers)
+    sneakers: Sneakers[];
 }

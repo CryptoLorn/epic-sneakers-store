@@ -28,7 +28,7 @@ export class OrdersService {
         return this.ordersRepository.destroy({where: {basketId}, force: true});
     }
 
-    // async deleteAllBySneakersId(sneakerId: number): Promise<number> {
-    //     return this.ordersRepository.destroy({where: {sneakerId}, force: true});
-    // }
+    async deleteAllBySneakersId(sneakerId: number): Promise<number> {
+        return this.ordersRepository.destroy({where: {sneakerId}, force: true});
+    }
 }

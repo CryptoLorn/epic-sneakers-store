@@ -1,6 +1,7 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 
 import { Baskets } from "../baskets/baskets.model";
+import { Sneakers } from "../sneakers/sneakers.model";
 
 @Table({tableName: "orders"})
 export class Orders extends Model<Orders> {
@@ -26,6 +27,13 @@ export class Orders extends Model<Orders> {
     @Column({type: DataType.INTEGER})
     basketId: number;
 
+    @ForeignKey(() => Sneakers)
+    @Column({type: DataType.INTEGER})
+    sneakerId: number
+
     @BelongsTo(() => Baskets)
     basket: Baskets;
+
+    @BelongsTo(() => Sneakers)
+    sneakers: Sneakers;
 }

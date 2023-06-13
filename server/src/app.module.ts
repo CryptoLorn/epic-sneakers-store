@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { ConfigModule } from "@nestjs/config";
+import * as path from "path";
 
 import { UsersModule } from "./users/users.module";
 import { User } from "./users/users.model";
@@ -21,6 +22,10 @@ import { Types } from "./types/types.model";
 import { BrandsTypes } from "./brands/brandsTypes.model";
 import { AnalyticsModule } from "./analytics/analytics.module";
 import { Analytics } from "./analytics/analytics.model";
+import { SneakersModule } from "./sneakers/sneakers.module";
+import { Sneakers } from "./sneakers/sneakers.model";
+import { FilesModule } from "./files/files.module";
+import {ServeStaticModule} from "@nestjs/serve-static";
 
 @Module({
   controllers: [],
@@ -28,6 +33,9 @@ import { Analytics } from "./analytics/analytics.model";
   imports: [
     ConfigModule.forRoot({
       envFilePath: ".env"
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, "static")
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",
@@ -37,7 +45,7 @@ import { Analytics } from "./analytics/analytics.model";
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       models: [
-          User,
+        User,
         Baskets,
         Orders,
         Tokens,
@@ -45,7 +53,8 @@ import { Analytics } from "./analytics/analytics.model";
         Brands,
         Types,
         BrandsTypes,
-        Analytics
+        Analytics,
+        Sneakers
       ],
       autoLoadModels: true
     }),
@@ -58,7 +67,9 @@ import { Analytics } from "./analytics/analytics.model";
     OrdersModule,
     BrandsModule,
     TypesModule,
-    AnalyticsModule
+    AnalyticsModule,
+    SneakersModule,
+    FilesModule
   ]
 })
 export class AppModule {}
