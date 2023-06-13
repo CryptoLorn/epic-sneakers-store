@@ -19,6 +19,8 @@ import { Brands } from "./brands/brands.model";
 import { TypesModule } from "./types/types.module";
 import { Types } from "./types/types.model";
 import { BrandsTypes } from "./brands/brandsTypes.model";
+import { AnalyticsModule } from "./analytics/analytics.module";
+import { Analytics } from "./analytics/analytics.model";
 
 @Module({
   controllers: [],
@@ -34,7 +36,17 @@ import { BrandsTypes } from "./brands/brandsTypes.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Baskets, Orders, Tokens, ActionToken, Brands, Types, BrandsTypes],
+      models: [
+          User,
+        Baskets,
+        Orders,
+        Tokens,
+        ActionToken,
+        Brands,
+        Types,
+        BrandsTypes,
+        Analytics
+      ],
       autoLoadModels: true
     }),
     UsersModule,
@@ -45,7 +57,8 @@ import { BrandsTypes } from "./brands/brandsTypes.model";
     BasketsModule,
     OrdersModule,
     BrandsModule,
-    TypesModule
+    TypesModule,
+    AnalyticsModule
   ]
 })
 export class AppModule {}
