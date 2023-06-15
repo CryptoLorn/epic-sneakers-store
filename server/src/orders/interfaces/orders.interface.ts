@@ -5,4 +5,5 @@ export interface IOrders {
     img: string;
     size: number;
     basketId: number;
+    sneakerId: number;
 }

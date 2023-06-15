@@ -62,8 +62,8 @@ export class SneakersController {
         return await this.sneakersService.deleteById(id);
     }
 
-    @Get("/search")
-    async getAllBySearching(): Promise<ISneakers[]> {
-        return await this.sneakersService.getAllBySearching();
+    @Get("/search/params")
+    async getAllBySearching(@Query("param") searchParam: string): Promise<ISneakers[]> {
+        return await this.sneakersService.getAllBySearching(searchParam);
     }
 }

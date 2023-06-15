@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
+import {
+    HttpException,
+    HttpStatus,
+    Injectable,
+    NotFoundException,
+    UnauthorizedException
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Op } from "sequelize";
 import * as bcrypt from "bcryptjs";
@@ -30,15 +36,32 @@ export class UsersService {
             throw new HttpException("User with this email is already exist", HttpStatus.BAD_REQUEST);
         }
 
+        const isAdmin = await this.userRepository.findOne({where: {role: constant.ADMIN}});
+
+        if (isAdmin && userDto.role === constant.ADMIN) {
+            throw new HttpException("Failed to register", HttpStatus.BAD_REQUEST);
+        }
+
         const activationLink = uuid.v4();
         const hashPassword = await bcrypt.hash(userDto.password, 7);
 
-        const user = await this.userRepository.create(
-            {
-                ...userDto,
-                password: hashPassword,
-                activation_link: activationLink
-            });
+        let user;
+        if (isAdmin) {
+            user = await this.userRepository.create(
+                {
+                    ...userDto,
+                    password: hashPassword,
+                    activation_link: activationLink
+                });
+        } else {
+            user = await this.userRepository.create(
+                {
+                    ...userDto,
+                    password: hashPassword,
+                    role: constant.ADMIN,
+                    activation_link: activationLink
+                });
+        }
         await this.basketService.create(user.id);
 
         return await this.userRepository.findOne({where: {email: user.email}, include: "basket"});
@@ -61,11 +84,11 @@ export class UsersService {
     }
 
     async getUserByEmail(email: string): Promise<IUser> {
-        return await this.userRepository.findOne({where: {email}});
+        return await this.userRepository.findOne({where: {email}, include: "basket"});
     }
 
     async getUserById(id: number): Promise<IUser> {
-        return await this.userRepository.findOne({where: {id}});
+        return await this.userRepository.findOne({where: {id}, include: "basket"});
     }
 
     async activate(activationLink: string): Promise<void> {

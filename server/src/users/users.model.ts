@@ -9,6 +9,7 @@ import { constant } from "../core/constants/constant";
 interface UserCreationAttrs {
     email: string;
     password: string;
+    role: string;
     activation_link: string;
 }
 

@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { Op } from "sequelize";
+import * as path from "path";
+import * as fs from "fs";
 
 import { Sneakers } from "./sneakers.model";
 import { CreateDto } from "./dto/create.dto";
@@ -78,15 +81,32 @@ export class SneakersService {
     }
 
     async deleteById(id: number): Promise<number> {
-        await this.getById(id);
+        const sneakers = await this.getById(id);
 
         await this.analyticsService.deleteById(id);
         await this.ordersService.deleteAllBySneakersId(id);
 
+        const fullPath = path.resolve(__dirname);
+        const parsePath = path.parse(fullPath);
+        const dirPath = parsePath.dir;
+
+        await fs.unlink(`${dirPath}/static/${sneakers.img}`, (err) => {
+            if (err) {
+                throw new NotFoundException({message: "Path not found"});
+            }
+        })
+
         return await this.sneakersRepository.destroy({where: {id}});
     }
 
-    async getAllBySearching(): Promise<ISneakers[]> {
-        return await this.sneakersRepository.findAll();
+    async getAllBySearching(searchParam: string): Promise<ISneakers[]> {
+        return await this.sneakersRepository.findAll({
+            where: {
+                [Op.or]: [
+                    {brand_name: {[Op.iLike]: `%${searchParam}%`}},
+                    {model: {[Op.iLike]: `%${searchParam}%`}}
+                ]
+            }
+        });
     }
 }

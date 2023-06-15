@@ -5,7 +5,7 @@ export class CreateDto {
     @IsNotEmpty({message: "Model can not be empty"})
     model: string;
 
-    @IsString({message: "Role must be string"})
+    @IsString({message: "Brand must be string"})
     @IsNotEmpty({message: "Brand can not be empty"})
     brand_name: string;
 
@@ -25,7 +25,7 @@ export class CreateDto {
     @IsNotEmpty()
     basketId: number;
 
-    // @IsNumber()
-    // @IsNotEmpty()
-    // sneakerId: number;
+    @IsNumber()
+    @IsNotEmpty()
+    sneakerId: number;
 }
