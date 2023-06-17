@@ -1,4 +1,5 @@
 export interface ISneakers {
+    id: number;
     model: string;
     brand_name?: string;
     price: number;

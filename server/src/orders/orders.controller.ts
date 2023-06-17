@@ -25,4 +25,9 @@ export class OrdersController {
     async deleteById(@Param("id") id: number): Promise<number> {
         return await this.ordersService.deleteById(id);
     }
+
+    @Delete("/all/:id")
+    async deleteAllById(@Param("id") id: number): Promise<number> {
+        return await this.ordersService.deleteAllByBasketId(id);
+    }
 }

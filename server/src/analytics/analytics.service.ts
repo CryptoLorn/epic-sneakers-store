@@ -10,8 +10,8 @@ export class AnalyticsService {
     constructor(@InjectModel(Analytics)
     private analyticsRepository: typeof Analytics) {}
 
-    async create(sneakerId: number): Promise<IAnalytics> {
-        return await this.analyticsRepository.create(sneakerId);
+    async create(sneakersId: number): Promise<IAnalytics> {
+        return await this.analyticsRepository.create({sneakersId});
     }
 
     async getAll(): Promise<IAnalytics[]> {
@@ -19,10 +19,10 @@ export class AnalyticsService {
     }
 
     async updateById(id: number, analytics: UpdateDto): Promise<[number]> {
-        return await this.analyticsRepository.update(analytics, {where: {id}});
+        return await this.analyticsRepository.update(analytics, {where: {sneakersId: id}});
     }
 
     async deleteById(id: number): Promise<number> {
-        return await this.analyticsRepository.destroy({where: {id}});
+        return await this.analyticsRepository.destroy({where: {sneakersId: id}});
     }
 }

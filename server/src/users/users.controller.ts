@@ -55,13 +55,11 @@ export class UsersController {
 
     @Put("/password/forgot")
     async setNewPassword(@Body("password") password: string, @Req() req: Request): Promise<string> {
-        const tokenWithBearer = req.get(constant.AUTHORIZATION);
+        const token = req.get(constant.AUTHORIZATION);
 
-        if (!tokenWithBearer) {
+        if (!token) {
             throw new NotFoundException({message: "No token"});
         }
-
-        const token = tokenWithBearer.split(' ')[1];
 
         return await this.userService.setNewPassword(token, password);
     }
