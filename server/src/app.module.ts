@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { ServeStaticModule } from "@nestjs/serve-static";
 import { ConfigModule } from "@nestjs/config";
 import * as path from "path";
 
@@ -25,7 +26,6 @@ import { Analytics } from "./analytics/analytics.model";
 import { SneakersModule } from "./sneakers/sneakers.module";
 import { Sneakers } from "./sneakers/sneakers.model";
 import { FilesModule } from "./files/files.module";
-import {ServeStaticModule} from "@nestjs/serve-static";
 
 @Module({
   controllers: [],

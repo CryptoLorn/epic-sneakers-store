@@ -22,7 +22,7 @@ export class SneakersService {
                 private ordersService: OrdersService,
                 private fileService: FilesService) {}
 
-    async create(sneakersDto: CreateDto, img: any): Promise<ISneakers> {
+    async create(sneakersDto: CreateDto, img: Express.Multer.File): Promise<ISneakers> {
         if (!img) {
             throw new HttpException("File not found", HttpStatus.BAD_REQUEST);
         }

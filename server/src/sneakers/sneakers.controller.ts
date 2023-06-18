@@ -1,9 +1,9 @@
 import {
     Body,
     Controller,
-    Delete,
-    Get,
-    Param,
+    Delete, FileTypeValidator,
+    Get, MaxFileSizeValidator,
+    Param, ParseFilePipe,
     Post,
     Put,
     Query,
@@ -32,7 +32,15 @@ export class SneakersController {
     @UseGuards(AuthGuard("jwt"))
     @Post()
     @UseInterceptors(FileInterceptor("img"))
-    async create(@Body() sneakers: CreateDto, @UploadedFile() img): Promise<ISneakers> {
+    async create(
+        @Body() sneakers: CreateDto,
+        @UploadedFile(new ParseFilePipe({
+            validators: [
+                new MaxFileSizeValidator({maxSize: 1000000}),
+                new FileTypeValidator({fileType: "image/jpeg|image/jpg|image/png|image/webp"})
+            ]
+        })) img: Express.Multer.File
+    ): Promise<ISneakers> {
         return await this.sneakersService.create(sneakers, img);
     }
 

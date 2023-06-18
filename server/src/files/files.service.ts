@@ -15,7 +15,7 @@ export class FilesService {
         }
     })
 
-    async upload(file): Promise<string> {
+    async upload(file: Express.Multer.File): Promise<string> {
         // Генерує унікальне імя для картинки. В кінці добавляє формат
         const filePath = `poster/${uuid.v4()}${extname(file.originalname)}`;
 
