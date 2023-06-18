@@ -1,0 +1,15 @@
+.item_in_bag {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: #ff0900;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color: white;
+    z-index: 1;
+    left: 6px;
+    top: -6px;
+}

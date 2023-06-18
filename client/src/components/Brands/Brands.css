@@ -1,0 +1,29 @@
+.brand_menu {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand_item, .active_brand {
+    cursor: pointer;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.brand_item span, .active_brand span {
+    margin-left: 10px;
+}
+
+.brand_item:hover, .active_brand:hover {
+    background-color: darkslategray;
+    color: white;
+}
+
+.active_brand {
+    background-color: darkslategray;
+    color: white;
+}

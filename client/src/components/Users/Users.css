@@ -1,0 +1,27 @@
+.user_wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.user_edit_button {
+    width: 80px;
+    height: 30px;
+    background-color: darkslategrey;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.user_edit_button:hover {
+    background-color: black;
+}

@@ -1,0 +1,24 @@
+.successful_order {
+    font-size: 18px;
+    font-weight: 500;
+    color: darkslategray;
+}
+
+.successful_order_info {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.successful_order_button {
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    border: 1px solid black;
+}
+
+.successful_order_button:hover {
+    background-color: #2f7575;
+    border: 1px solid black;
+}

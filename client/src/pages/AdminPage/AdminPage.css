@@ -1,0 +1,63 @@
+.admin_page_wrapper {
+    margin: 50px;
+    height: 1000px;
+}
+
+.admin_buttons_wrapper {
+    display: flex;
+    column-gap: 50px;
+}
+
+.admin_buttons_wrapper a {
+    text-decoration: none;
+    color: white;
+}
+
+#dropdown-basic:read-only {
+    background-color: darkslategrey;
+}
+
+.dropdown_menu {
+    background-color: black;
+}
+
+.dropdown_menu a {
+    color: white;
+}
+
+.dropdown_admin {
+    background-color: darkslategray;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.dropdown_admin:hover {
+    background-color: black;
+    border: 1px solid white;
+}
+
+.admin_page_button {
+    width: 120px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkslategrey;
+    cursor: pointer;
+    border-radius: 10px;
+
+    border: 1px solid black;
+}
+
+.admin_page_button a {
+    text-decoration: none;
+    color: white;
+}
+
+.admin_page_button:hover {
+    background-color: black;
+}
+
+.admin_page_outlet {
+    margin-top: 30px;
+}

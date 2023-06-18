@@ -1,0 +1,45 @@
+.analytics_name_tables {
+    width: 598px;
+    height: 40px;
+    display: flex;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+.analytics_name {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    border-right: 1px solid black;
+}
+
+.analytics_views, .analytics_bought {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid black;
+}
+
+.buttons_wrapper {
+    display: flex;
+    column-gap: 20px;
+}
+
+.sort_button {
+    width: 120px;
+    height: 35px;
+    background-color: darkslategrey;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.sort_button:hover {
+    background-color: black;
+}

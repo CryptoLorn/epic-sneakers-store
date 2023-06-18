@@ -1,0 +1,30 @@
+.orders {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.to_pay {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.to_pay span span {
+    color: #ff0900;
+    font-size: 26px;
+}
+
+.order_button {
+    width: 130px;
+    background-color: darkslategray;
+    border: 1px solid black;
+    font-size: 18px;
+}
+
+.order_button:hover {
+    background-color: #2f7575;
+    border: 1px solid black;
+}

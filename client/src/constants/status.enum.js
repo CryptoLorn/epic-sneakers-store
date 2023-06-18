@@ -1,0 +1,4 @@
+module.exports = {
+    ACTIVATED: 'ACTIVATED',
+    UNACTIVATED: 'UNACTIVATED'
+}

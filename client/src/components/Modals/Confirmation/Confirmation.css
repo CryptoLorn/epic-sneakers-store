@@ -1,0 +1,25 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.confirmation_button {
+    width: 70px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: darkslategray;
+    color: white;
+
+    border: 1px solid black;
+}
+
+.confirmation_button:hover {
+    background-color: black;
+    color: white;
+}

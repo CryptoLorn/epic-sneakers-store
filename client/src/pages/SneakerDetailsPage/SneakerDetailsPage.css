@@ -1,0 +1,143 @@
+.details_page_wrapper {
+    margin: 50px;
+    height: 1000px;
+}
+
+.details_page {
+    display: flex;
+    column-gap: 50px;
+}
+
+.details_page_characteristics {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 600px;
+}
+
+.details_page_title {
+    font-size: 26px;
+}
+
+.details_page_sizes {
+    display: flex;
+    column-gap: 10px;
+    height: 70px;
+}
+
+.sizes {
+    display: flex;
+    column-gap: 10px;
+}
+
+.border_bottom {
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+}
+
+.size, .size_active {
+    border: 1px solid #8c8c8c;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: gray;
+    font-size: 18px;
+}
+
+.size:hover, .size_active:hover {
+    border: 1px solid darkslategray;
+    color: black;
+}
+
+.size_active {
+    color: white;
+    background-color: cadetblue;
+}
+
+.size_active:hover {
+    color: white;
+}
+
+.size_validation {
+    font-size: 20px;
+    color: #ff0900;
+}
+
+.details_page_price {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.price span b {
+    font-size: 40px;
+    margin-left: 30px;
+    color: #ff0900;
+}
+
+.price_currency {
+    font-size: 25px;
+    color: #ff0900;
+}
+
+.price_button {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    border: 1px solid black;
+    background-color: cadetblue;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.price_button:hover {
+    background-color: #67aeb0;
+    transform: scale(1.03);
+}
+
+.price_button div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details_page_description {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    row-gap: 10px;
+}
+
+.details_page_description b {
+    font-size: 20px;
+}
+
+.options {
+    margin-top: 50px;
+}
+
+.admin_options {
+    display: flex;
+    column-gap: 20px;
+}
+
+.update_price_button, .delete_button {
+    cursor: pointer;
+    font-size: 26px;
+    width: 28px;
+    height: 38px;
+}
+
+.update_price_button:hover, .delete_button:hover {
+    transform: scale(1.2);
+}

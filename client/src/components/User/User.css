@@ -1,0 +1,42 @@
+.user_details {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid black;
+}
+
+.user_details div {
+    margin: 5px;
+}
+
+.user_edit {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.user_edit:hover {
+    transform: scale(1.2);
+}
+
+.user_delete {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.user_delete:hover {
+    transform: scale(1.2);
+}
+
+.user_details_activated {
+    color: green;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.user_details_unactivated {
+    color: red;
+    margin-left: 5px;
+    font-size: 16px;
+}

@@ -1,0 +1,52 @@
+.home_wrapper {
+    display: flex;
+    /*justify-content: space-between;*/
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 30px;
+    column-gap: 100px;
+}
+
+.home_type_cards {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    justify-content: space-between;
+    width: 814px;
+}
+
+.home_sneakers_list {
+    width: 812px;
+    height: 1113px;
+    border: 1px solid black;
+}
+
+.sneakers_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.search_input {
+    width: 300px;
+}
+
+.search_button {
+    background-color: darkslategray;
+    color: white;
+}
+
+.search_button:hover {
+    background-color: black;
+    color: white;
+}

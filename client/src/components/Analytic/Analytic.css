@@ -1,0 +1,27 @@
+.analytic_wrapper {
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    width: 598px;
+    border: 1px solid black;
+}
+
+.analytic {
+    display: flex;
+}
+
+.analytic_name {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    border-right: 1px solid black;
+}
+
+.analytic_views, .analytic_bought {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid black;
+}
