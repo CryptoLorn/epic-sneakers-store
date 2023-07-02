@@ -19,6 +19,8 @@ import { ActionTokenService } from "../actionToken/actionToken.service";
 import { MailService } from "../mail/mail.service";
 import { BasketsService } from "../baskets/baskets.service";
 import { Baskets } from "../baskets/baskets.model";
+import { Img } from "../imgs/img.model";
+import { ImgsService } from "../imgs/imgs.service";
 
 @Module({
   controllers: [SneakersController],
@@ -32,10 +34,12 @@ import { Baskets } from "../baskets/baskets.model";
     TokensService,
     ActionTokenService,
     MailService,
-    BasketsService
+    BasketsService,
+    ImgsService
   ],
   imports: [SequelizeModule.forFeature([
     Sneakers,
+    Img,
     Analytics,
     Orders,
     User,

@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist", // must have ./dist || if docker must be ../dist
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,

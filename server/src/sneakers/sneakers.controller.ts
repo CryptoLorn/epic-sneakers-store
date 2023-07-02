@@ -1,18 +1,25 @@
 import {
     Body,
     Controller,
-    Delete, FileTypeValidator,
-    Get, MaxFileSizeValidator,
-    Param, ParseFilePipe,
+    Delete,
+    // FileTypeValidator,
+    Get,
+    // MaxFileSizeValidator,
+    Param,
+    // ParseFilePipe,
     Post,
     Put,
     Query,
-    UploadedFile,
+    // UploadedFile,
+    UploadedFiles,
     UseGuards,
     UseInterceptors
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { FileInterceptor } from "@nestjs/platform-express";
+import {
+    // FileInterceptor,
+    FilesInterceptor
+} from "@nestjs/platform-express";
 
 import { SneakersService } from "./sneakers.service";
 import { CreateDto } from "./dto/create.dto";
@@ -31,15 +38,19 @@ export class SneakersController {
     @UseGuards(RoleGuard)
     @UseGuards(AuthGuard("jwt"))
     @Post()
-    @UseInterceptors(FileInterceptor("img"))
+    // If one image
+    // @UseInterceptors(FileInterceptor("img"))
+    @UseInterceptors(FilesInterceptor("img", 5))
     async create(
         @Body() sneakers: CreateDto,
-        @UploadedFile(new ParseFilePipe({
-            validators: [
-                new MaxFileSizeValidator({maxSize: 1000000}),
-                new FileTypeValidator({fileType: "image/jpeg|image/jpg|image/png|image/webp"})
-            ]
-        })) img: Express.Multer.File
+        // If one image
+        // @UploadedFile(new ParseFilePipe({
+        //             validators: [
+        //                 new MaxFileSizeValidator({maxSize: 1000000}),
+        //                 new FileTypeValidator({fileType: "image/jpeg|image/jpg|image/png|image/webp"})
+        //             ]
+        //         })) img: Express.Multer.File
+        @UploadedFiles() img: Express.Multer.File[]
     ): Promise<ISneakers> {
         return await this.sneakersService.create(sneakers, img);
     }
@@ -66,7 +77,7 @@ export class SneakersController {
     @UseGuards(RoleGuard)
     @UseGuards(AuthGuard("jwt"))
     @Delete("/:id")
-    async deleteById(@Param("id") id: number):Promise<number> {
+    async deleteById(@Param("id") id: number): Promise<number> {
         return await this.sneakersService.deleteById(id);
     }
 

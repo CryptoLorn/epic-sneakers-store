@@ -13,6 +13,7 @@ import { Brands } from "../brands/brands.model";
 import { Types } from "../types/types.model";
 import { Orders } from "../orders/orders.model";
 import { Analytics } from "../analytics/analytics.model";
+import { Img } from "../imgs/img.model";
 
 @Table({tableName: "sneakers"})
 export class Sneakers extends Model<Sneakers> {
@@ -34,8 +35,8 @@ export class Sneakers extends Model<Sneakers> {
     @Column({type: DataType.STRING})
     material: string;
 
-    @Column({type: DataType.STRING, allowNull: false})
-    img: string;
+    // @Column({type: DataType.STRING, allowNull: false})
+    // img: string;
 
     @Column({type: DataType.STRING})
     description: string;
@@ -59,4 +60,7 @@ export class Sneakers extends Model<Sneakers> {
 
     @HasOne(() => Analytics)
     analytics: Analytics;
+
+    @HasMany(() => Img)
+    img: Img[];
 }

@@ -1,3 +1,5 @@
+import { IImage } from "../../imgs/interfaces/img.interface";
+
 export interface ISneakers {
     id: number;
     model: string;
@@ -5,8 +7,10 @@ export interface ISneakers {
     price: number;
     color?: string;
     material?: string;
-    img: string;
+    img: IImage[];
     description?: string;
+    brandId: number;
+    typeId: number;
 }
 
 export interface ISneakersResponse {

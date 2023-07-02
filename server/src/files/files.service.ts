@@ -16,7 +16,7 @@ export class FilesService {
     })
 
     async upload(file: Express.Multer.File): Promise<string> {
-        // Генерує унікальне імя для картинки. В кінці добавляє формат
+        // Generates unique name for image. Adds format at the end
         const filePath = `poster/${uuid.v4()}${extname(file.originalname)}`;
 
         await this.s3Client.send(
@@ -41,13 +41,13 @@ export class FilesService {
         )
     }
 
-    // Збереження картинок в локальну папку
+    // Save image in local folder
     async createFile(file): Promise<string> {
         try {
             const fileName = uuid.v4() + ".jpg";
             const filePath = path.resolve(__dirname, "..", "static");
 
-            //Якщо по такому шляху папки не існує, то ми її створюємо
+            // If path not found, then we create folder
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, {recursive: true});
             }

@@ -26,6 +26,8 @@ import { Analytics } from "./analytics/analytics.model";
 import { SneakersModule } from "./sneakers/sneakers.module";
 import { Sneakers } from "./sneakers/sneakers.model";
 import { FilesModule } from "./files/files.module";
+import { Img } from "./imgs/img.model";
+import { ImgsModule } from './imgs/imgs.module';
 
 @Module({
   controllers: [],
@@ -54,7 +56,8 @@ import { FilesModule } from "./files/files.module";
         Types,
         BrandsTypes,
         Analytics,
-        Sneakers
+        Sneakers,
+        Img
       ],
       autoLoadModels: true
     }),
@@ -69,7 +72,8 @@ import { FilesModule } from "./files/files.module";
     TypesModule,
     AnalyticsModule,
     SneakersModule,
-    FilesModule
+    FilesModule,
+    ImgsModule
   ]
 })
 export class AppModule {}
