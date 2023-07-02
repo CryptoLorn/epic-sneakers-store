@@ -1,4 +1,5 @@
-const baseURL = 'http://localhost:5000/';
+const baseURL = 'http://localhost:5000/'; // /api http://localhost:5000/
+export const awsImgUrl = 'https://epic-sneakers.s3.amazonaws.com';
 
 export const urls = {
     registration: '/auth/signup',

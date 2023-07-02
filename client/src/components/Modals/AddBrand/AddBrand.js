@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {Button, Form, FormControl, Modal} from "react-bootstrap";
 import {joiResolver} from "@hookform/resolvers/joi";
@@ -10,14 +10,20 @@ import {TypeBrandValidator} from "../../../validators/typeBrand.validator";
 import {setBrandVisible} from "../../../store/slices/visible.slice";
 
 const AddBrand = ({show, onHide}) => {
-    const {handleSubmit, register, reset, formState: {errors}} = useForm({resolver: joiResolver(TypeBrandValidator)});
+    const {error} = useSelector(state => state.brandReducer);
+    const {handleSubmit, register, reset, formState: {errors}} = useForm(
+        {resolver: joiResolver(TypeBrandValidator)}
+    );
     const dispatch = useDispatch();
 
     const addBrand = (data) => {
-        dispatch(createBrand({data}));
-        onHide();
-        dispatch(setBrandVisible(false));
-        reset();
+        dispatch(createBrand({data})).then(value => {
+            if (!value.error) {
+                onHide();
+                dispatch(setBrandVisible(false));
+                reset();
+            }
+        });
     }
 
     const hide = () => {
@@ -43,6 +49,7 @@ const AddBrand = ({show, onHide}) => {
                     <FormControl type={'text'} placeholder={'name'} {...register('name')}/>
                 </Form>
                 {errors.name && <span className={'validation'}>{errors.name.message}</span>}
+                {error && <span className={'validation'}>{error}</span>}
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleSubmit(addBrand)}>Add</Button>

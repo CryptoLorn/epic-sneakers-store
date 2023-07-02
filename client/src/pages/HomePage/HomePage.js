@@ -10,7 +10,12 @@ import SneakersCard from "../../components/SneakersCard/SneakersCard";
 import Brands from "../../components/Brands/Brands";
 import Pages from "../../components/Pages/Pages";
 import Type from "../../components/Types/Types";
-import {getAllSneakers, getAllSneakersWithParams, getAllBySearching, setSneakersFound} from "../../store/slices/sneakers.slice";
+import {
+    getAllSneakers,
+    getAllSneakersWithParams,
+    getAllBySearching,
+    setSneakersFound
+} from "../../store/slices/sneakers.slice";
 import {SearchValidator} from "../../validators/search.validator";
 
 const HomePage = () => {
@@ -21,7 +26,9 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const [notFoundMessageVisible, setNotFoundMessageVisible] = useState(false);
     const [query, setQuery] = useSearchParams();
-    const {handleSubmit, register, reset, formState: {errors}} = useForm({resolver: joiResolver(SearchValidator)});
+    const {handleSubmit, register, reset, formState: {errors}} = useForm(
+        {resolver: joiResolver(SearchValidator)}
+    );
 
     useEffect(() => {
         dispatch(getAllSneakers());

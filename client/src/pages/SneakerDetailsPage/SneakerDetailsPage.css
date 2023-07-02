@@ -8,6 +8,39 @@
     column-gap: 50px;
 }
 
+.details_page_img_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.previous_arrow, .next_arrow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #797979;
+    border-radius: 50%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: darkslategray;
+}
+
+.previous_arrow {
+    margin-right: -23px;
+}
+
+.next_arrow {
+    margin-left: -23px;
+}
+
+.previous_arrow:hover, .next_arrow:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border: 1px solid #464545;
+}
+
 .details_page_characteristics {
     font-size: 16px;
     display: flex;

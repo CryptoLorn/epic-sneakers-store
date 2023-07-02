@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 import "./SneakersCard.css";
 import {updateAnalyticsById} from "../../store/slices/analytics.slice";
+import {awsImgUrl} from "../../configs/urls";
 
 const SneakersCard = ({sneaker: {id, model, price, img, brand_name}}) => {
     const {analytics} = useSelector(state => state.analyticsReducer);
@@ -23,7 +24,7 @@ const SneakersCard = ({sneaker: {id, model, price, img, brand_name}}) => {
         <div onClick={reviewed} className={'sneakers_card_wrapper'}>
             <Link to={`/${model}/` + id.toString()}>
                 <div className={'sneakers_card'}>
-                    <div className={'sneakers_card_poster'}><img src={img} alt={brand_name}/></div>
+                    <div className={'sneakers_card_poster'}><img src={`${awsImgUrl}/${img[0].path}`} alt={brand_name}/></div>
                     <div className={'sneakers_card_short_info'}>
                         <div className={'sneakers_card_name'}>
                             <span>Sneakers </span>

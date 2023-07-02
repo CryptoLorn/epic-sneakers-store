@@ -3,24 +3,27 @@ import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {Button, Form, FormControl, Modal} from "react-bootstrap";
 import {joiResolver} from "@hookform/resolvers/joi/dist/joi";
-import {useNavigate} from "react-router-dom";
 
 import "../../../validators/validator.css";
 import {createType} from "../../../store/slices/type.slice";
 import {TypeBrandValidator} from "../../../validators/typeBrand.validator";
-
 import {setTypeVisible} from "../../../store/slices/visible.slice";
 
 const AddType = ({show, onHide}) => {
-    const {handleSubmit, register, reset, formState: {errors}} = useForm({resolver: joiResolver(TypeBrandValidator)});
+    const {error} = useSelector(state => state.typeReducer);
+    const {handleSubmit, register, reset, formState: {errors}} = useForm(
+        {resolver: joiResolver(TypeBrandValidator)}
+    );
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const addType = (data) => {
-        dispatch(createType({data}));
-        onHide();
-        dispatch(setTypeVisible(false));
-        reset();
+        dispatch(createType({data})).then(value => {
+            if (!value.error) {
+                onHide();
+                dispatch(setTypeVisible(false));
+                reset();
+            }
+        });
     }
 
     const hide = () => {
@@ -46,6 +49,7 @@ const AddType = ({show, onHide}) => {
                     <FormControl type={'text'} placeholder={'name'} {...register('name')}/>
                 </Form>
                 {errors.name && <span className={'validation'}>{errors.name.message}</span>}
+                {error && <span className={'validation'}>{error}</span>}
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleSubmit(addType)}>Add</Button>

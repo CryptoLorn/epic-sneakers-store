@@ -13,17 +13,24 @@ import AddBrand from "../AddBrand/AddBrand";
 import {setTypeVisible, setBrandVisible} from "../../../store/slices/visible.slice";
 
 const AddSneakers = ({show, onHide}) => {
-    const [selectedTypeAdd, setSelectedTypeAdd] = useState(null);
-    const [selectedBrandAdd, setSelectedBrandAdd] = useState(null);
-    const [file, setFile] = useState(null);
+    const {error} = useSelector(state => state.sneakersReducer);
     const {brands} = useSelector(state => state.brandReducer);
     const {types} = useSelector(state => state.typeReducer);
     const {typeVisible, brandVisible} = useSelector(state => state.visibleReducer);
+    const [selectedTypeAdd, setSelectedTypeAdd] = useState(null);
+    const [selectedBrandAdd, setSelectedBrandAdd] = useState(null);
+    const [images, setImages] = useState([]);
     const dispatch = useDispatch();
-    const {handleSubmit, register, reset, formState: {errors}} = useForm({resolver: joiResolver(SneakersValidator)});
+    const {handleSubmit, register, reset, formState: {errors}} = useForm({
+        resolver: joiResolver(SneakersValidator)
+    });
 
     const selectFile = e => {
-        setFile(e.target.files[0]);
+        // If need to upload one image
+        // setImages(e.target.files[0]);
+
+        const files = e.target.files;
+        setImages([...files]);
     }
 
     const addSneakers = (data) => {
@@ -32,14 +39,22 @@ const AddSneakers = ({show, onHide}) => {
         formData.append('brand_name', selectedBrandAdd.name);
         formData.append('price', `${data.price}`);
         formData.append('color', data.color);
+        // If need to upload one image
+        // formData.append('img', images);
         formData.append('material', data.material);
-        formData.append('img', file);
         formData.append('description', data.description);
         formData.append('brandId', selectedBrandAdd.id);
         formData.append('typeId', selectedTypeAdd.id);
-        dispatch(createSneakers({data: formData}));
-        onHide();
-        reset();
+        for (let i = 0; i < images.length; i++) {
+            formData.append('img', images[i]);
+        }
+
+        dispatch(createSneakers({data: formData})).then(value => {
+            if (!value.error) {
+                onHide();
+                reset();
+            }
+        });
     }
 
     return (
@@ -127,8 +142,10 @@ const AddSneakers = ({show, onHide}) => {
                     <Form.Control
                         className={'my-3'}
                         type={'file'}
+                        multiple
                         onChange={selectFile}
                     />
+                    {error && <span className={'validation'}>{error}</span>}
                 </Form>
             </Modal.Body>
             <Modal.Footer>

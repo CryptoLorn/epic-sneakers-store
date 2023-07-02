@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {FaShoppingBag, FaTrashAlt, FaEdit} from "react-icons/fa";
+import {FaShoppingBag, FaTrashAlt, FaEdit, FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import {Spinner} from "react-bootstrap";
 
 import "./SneakerDetailsPage.css";
@@ -11,6 +11,7 @@ import {setLoginVisible, setConfirmationVisible} from "../../store/slices/visibl
 import Confirmation from "../../components/Modals/Confirmation/Confirmation";
 import EditSneakersPrice from "../../components/Modals/EditSneakersPrice/EditSneakersPrice";
 import {ADMIN} from "../../constants/role.enum";
+import {awsImgUrl} from "../../configs/urls";
 
 const SneakerDetailsPage = () => {
     const {id} = useParams();
@@ -19,6 +20,7 @@ const SneakerDetailsPage = () => {
     const {user} = useSelector(state => state.authReducer);
     const {selectedSize, error} = useSelector(state => state.ordersReducer);
     const dispatch = useDispatch();
+    const [index, setIndex] = useState(0);
 
     const sizes = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 
@@ -40,7 +42,7 @@ const SneakerDetailsPage = () => {
                     model: sneaker.model,
                     price: sneaker.price,
                     size: selectedSize,
-                    img: sneaker.img
+                    img: sneaker.img[0].path
                 }
             }));
         } else {
@@ -48,12 +50,25 @@ const SneakerDetailsPage = () => {
         }
     }
 
+    const imgArr = sneaker.img;
+    const next = () => {
+        setIndex((prevIndex) => (prevIndex + 1) % imgArr.length);
+    }
+
+    const previous = () => {
+        setIndex((prevIndex) => prevIndex === 0 ? imgArr.length - 1 : prevIndex - 1);
+    }
+
     return (
         <div className={'details_page_wrapper'}>
             {sneaker && (
                 <div>
                     <div className={'details_page'}>
-                        <div><img src={sneaker.img} alt={sneaker.brand_name} width={500}/></div>
+                        <div className={'details_page_img_wrapper'}>
+                            <div className={'previous_arrow'} onClick={previous}><FaAngleLeft/></div>
+                            <div><img src={`${awsImgUrl}/${sneaker.img[index].path}`} alt={sneaker.brand_name} width={500}/></div>
+                            <div className={'next_arrow'} onClick={next}><FaAngleRight/></div>
+                        </div>
                         <div className={'details_page_characteristics'}>
                             <h2 className={'details_page_title'}>
                                 {sneaker.typeId === 1 ?
