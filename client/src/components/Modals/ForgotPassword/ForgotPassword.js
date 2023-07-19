@@ -11,7 +11,11 @@ import {EmailValidator} from "../../../validators/email.validator";
 const ForgotPassword = ({show, onHide}) => {
     const {error} = useSelector(state => state.userReducer);
     const [message, setMessage] = useState(null);
-    const {register, handleSubmit, formState: {errors}} = useForm({resolver: joiResolver(EmailValidator)});
+    const {
+        register,
+        handleSubmit,
+        formState: {errors}
+    } = useForm({resolver: joiResolver(EmailValidator)});
     const dispatch = useDispatch();
 
     const submit = (email) => {
@@ -33,9 +37,31 @@ const ForgotPassword = ({show, onHide}) => {
                             <form>
                                 <div className={'forgot_password_input'}>
                                     Enter your email: <input type='email'{...register('email')}/>
-                                    {errors.email && <span className={'validation'}>{errors.email.message}</span>}
-                                    {error? <span className={'validation'}>{error}</span> : <span className={'forgot_password_message'}>{message}</span>}
-                                    {!error&& message? <div className={'forgot_password_button'} onClick={() => onHide()}>Ok</div> : <div className={'forgot_password_button'} onClick={handleSubmit(submit)}>Send password reset email</div>}
+                                    {errors.email &&
+                                        <span className={'validation'}>
+                                            {errors.email.message}
+                                        </span>
+                                    }
+                                    {error?
+                                        <span className={'validation'}>{error}</span>
+                                        :
+                                        <span className={'forgot_password_message'}>{message}</span>
+                                    }
+                                    {!error&& message?
+                                        <div
+                                            className={'forgot_password_button'}
+                                            onClick={() => onHide()}
+                                        >
+                                            Ok
+                                        </div>
+                                        :
+                                        <div
+                                            className={'forgot_password_button'}
+                                            onClick={handleSubmit(submit)}
+                                        >
+                                            Send password reset email
+                                        </div>
+                                    }
                                 </div>
                             </form>
                         </div>

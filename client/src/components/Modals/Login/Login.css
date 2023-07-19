@@ -26,6 +26,16 @@
     height: 25px;
 }
 
+.password_input {
+    display: flex;
+}
+
+.login_fa_reg_eye_slash {
+    position: absolute;
+    margin-left: 55%;
+    cursor: pointer;
+}
+
 .login_info {
     display: flex;
     align-items: center;

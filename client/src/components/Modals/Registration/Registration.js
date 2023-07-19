@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import {useForm} from "react-hook-form";
 import {joiResolver} from "@hookform/resolvers/joi/dist/joi";
+import {FaRegEyeSlash, FaRegEye} from "react-icons/fa";
 
 import "./Registration.css";
 import "../../../validators/validator.css";
@@ -19,6 +20,7 @@ const Registration = ({show, onHide}) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isShow, setIsShow] = useState(false);
 
     const submit = async () => {
         await dispatch(registration({data: {email, password}}));
@@ -52,13 +54,24 @@ const Registration = ({show, onHide}) => {
                                         />
                                     </div>
                                     {errors.email && <span className={'validation'}>{errors.email.message}</span>}
-                                    <div>
+                                    <div className={'password_input'}>
                                         <input
-                                            type='password'
+                                            type={isShow ? 'text' : 'password'}
                                             placeholder={'password...'}
                                             {...register('password')}
                                             onChange={e => setPassword(e.target.value)}
                                         />
+                                        <div
+                                            className={'register_fa_reg_eye_slash'}
+                                            onClick={() => setIsShow(show => !show)}
+                                        >
+                                            {
+                                                isShow ?
+                                                    <FaRegEye/>
+                                                    :
+                                                    <FaRegEyeSlash/>
+                                            }
+                                        </div>
                                     </div>
                                     {errors.password && <span className={'validation'}>{errors.password.message}</span>}
                                     {error&& <span className={'validation'}>{error}</span>}
