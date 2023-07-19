@@ -70,6 +70,8 @@ export class SneakersService {
         params.limit = params.limit || 9
         let offset = params.page * params.limit - params.limit;
 
+        const allSneakers = await this.sneakersRepository.findAndCountAll();
+
         let response;
         if (!params.brandId && !params.typeId) {
             response = await this.sneakersRepository.findAndCountAll({
@@ -107,7 +109,7 @@ export class SneakersService {
         }
 
         return {
-            count: response.count,
+            count: allSneakers.count,
             rows: sneakersMapper.toManyResponse(response.rows)
         };
     }
