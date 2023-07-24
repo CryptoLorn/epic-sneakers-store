@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Spinner} from "react-bootstrap";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -14,8 +14,10 @@ import Users from "./components/Users/Users";
 import Analytics from "./components/Analytics/Analytics";
 import RequireAuth from "./hooc/RequireAuth";
 import RestorePasswordPage from "./pages/RestorePasswordPage/RestorePasswordPage";
+import Message from "./components/Modals/Message/Message";
 
 function App() {
+    const {messageVisible} = useSelector(state => state.visibleReducer);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
@@ -32,9 +34,11 @@ function App() {
     }
 
     return (
-        <Routes>
-            <Route path={'/'} element={<Layout/>}>
-                <Route path={'/'} element={<HomePage/>}/>
+        <>
+            {messageVisible && <Message/>}
+            <Routes>
+                <Route path={'/'} element={<Layout/>}>
+                    <Route path={'/'} element={<HomePage/>}/>
                     <Route path={'admin'} element={
                         <RequireAuth>
                             <AdminPage/>
@@ -43,12 +47,13 @@ function App() {
                         <Route path={'users'} element={<Users/>}/>
                         <Route path={'analytics'} element={<Analytics/>}/>
                     </Route>
-                <Route path={':name/:id'} element={<SneakerDetailsPage/>}/>
-                <Route path={'password/forgot/:token'} element={<RestorePasswordPage/>}/>
-                <Route path={'about'} element={<AboutPage/>}/>
-                <Route path={'*'} element={<NotFoundPage/>}/>
-            </Route>
-        </Routes>
+                    <Route path={':name/:id'} element={<SneakerDetailsPage/>}/>
+                    <Route path={'password/forgot/:token'} element={<RestorePasswordPage/>}/>
+                    <Route path={'about'} element={<AboutPage/>}/>
+                    <Route path={'*'} element={<NotFoundPage/>}/>
+                </Route>
+            </Routes>
+        </>
     );
 }
 

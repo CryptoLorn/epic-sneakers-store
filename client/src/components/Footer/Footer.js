@@ -1,8 +1,14 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {FaInstagram, FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare} from "react-icons/fa";
+import {Link} from 'react-router-dom';
+import {
+    FaInstagram,
+    FaFacebookSquare,
+    FaTwitterSquare,
+    FaYoutubeSquare,
+    FaTelegramPlane
+} from 'react-icons/fa';
 
-import "./Footer.css";
+import './Footer.css';
 
 const Footer = () => {
 
@@ -20,10 +26,21 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className={'social_networks'}>
-                        <div className={'social'}><a href={'https://www.instagram.com'} target="_blank"><FaInstagram/></a></div>
-                        <div className={'social'}><a href={'https://www.facebook.com'} target="_blank"><FaFacebookSquare/></a></div>
-                        <div className={'social'}><a href={'https://twitter.com'} target="_blank"><FaTwitterSquare/></a></div>
-                        <div className={'social'}><a href={'https://www.youtube.com'} target="_blank"><FaYoutubeSquare/></a></div>
+                        <div className={'social'}>
+                            <a href={'https://www.instagram.com'} target="_blank"><FaInstagram/></a>
+                        </div>
+                        <div className={'social'}>
+                            <a href={'https://www.facebook.com'} target="_blank"><FaFacebookSquare/></a>
+                        </div>
+                        <div className={'social'}>
+                            <a href={'https://twitter.com'} target="_blank"><FaTwitterSquare/></a>
+                        </div>
+                        <div className={'social'}>
+                            <a href={'https://www.youtube.com'} target="_blank"><FaYoutubeSquare/></a>
+                        </div>
+                        <div className={'social'}>
+                            <a href={'https://t.me/epicsneakersbot'} target="_blank"><FaTelegramPlane/></a>
+                        </div>
                     </div>
                     <div className={'contacts'}>
                         <h5>CONTACTS</h5>

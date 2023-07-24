@@ -1,0 +1,51 @@
+.message_wrapper {
+    width: 240px;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 83.5%;
+    position: fixed;
+    bottom: 20px;
+    z-index: 1;
+    background-color: #1c282f;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+}
+
+.message_header {
+    width: 20px;
+    height: 20px;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.message_header:hover {
+    cursor: pointer;
+    color: #2f7575;
+}
+
+.message_body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-left: 10px;
+    color: white;
+}
+
+.message_body a {
+    text-decoration: none;
+}
+
+.message_body a:hover {
+    color: #2f7575;
+}
+
+.message_body_top {
+    margin-top: 10px;
+}
+
+.message_body_bottom {
+    font-size: 14px;
+}

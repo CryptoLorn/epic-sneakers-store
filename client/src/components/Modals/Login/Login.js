@@ -101,10 +101,7 @@ const Login = ({show, onHide}) => {
                                             <div onClick={() => forgotPasswordRedirect()}>
                                                 <span>Forgot password?</span>
                                             </div>
-                                            <div>No account?
-                                                <span onClick={() => registrationRedirect()}>
-                                                    Registration
-                                                </span>
+                                            <div>No account? <span onClick={() => registrationRedirect()}>Registration</span>
                                             </div>
                                         </div>
                                         <Registration

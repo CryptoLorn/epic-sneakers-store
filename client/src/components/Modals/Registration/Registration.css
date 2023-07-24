@@ -54,11 +54,12 @@
 
 .registration_button {
     width: 100px;
-    height: 25px;
+    height: 30px;
     border: 1px solid black;
     border-radius: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
     background-color: darkslategray;
     color: white;
